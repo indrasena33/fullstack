@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Learning Hub</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --bg: #f9fafb;
+            --card: #ffffff;
+            --text: #1f2937;
+            --sidebar-bg: #111827;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); margin: 0; display: flex; }
+        
+        /* Sidebar */
+        .sidebar { width: 250px; height: 100vh; background: var(--sidebar-bg); color: white; padding: 20px; position: fixed; }
+        .sidebar h2 { color: #818cf8; font-size: 1.5rem; margin-bottom: 30px; }
+        .nav-item { padding: 12px; cursor: pointer; border-radius: 8px; transition: 0.3s; margin-bottom: 5px; }
+        .nav-item:hover, .nav-item.active { background: #374151; color: #818cf8; }
+
+        /* Main Content */
+        .main { margin-left: 250px; padding: 40px; width: calc(100% - 250px); }
+        
+        /* Section Control */
+        .content-section { display: none; }
+        .content-section.active { display: block; animation: fadeIn 0.3s ease-in; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Header */
+        .header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 40px; background: white; padding: 15px 25px; border-radius: 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .user-profile { display: flex; align-items: center; gap: 12px; cursor: pointer; }
+        .profile-pic { width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary); }
+
+        /* Dashboard Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+        .card { background: var(--card); padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); transition: transform 0.2s; }
+        .card:hover { transform: translateY(-5px); }
+        
+        /* Recordings Table */
+        .recording-container { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 15px; border-bottom: 1px solid #edf2f7; }
+        th { color: #64748b; font-size: 0.8rem; text-transform: uppercase; }
+        .play-btn { color: var(--primary); text-decoration: none; font-weight: bold; }
+        .play-btn:hover { text-decoration: underline; }
+
+        .tag { background: #e0e7ff; color: #4338ca; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; }
+        progress { width: 100%; height: 8px; border-radius: 10px; margin: 10px 0; }
+        progress::-webkit-progress-bar { background-color: #e5e7eb; border-radius: 10px; }
+        progress::-webkit-progress-value { background-color: var(--primary); border-radius: 10px; }
+        .btn { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-block; width: 100%; text-align: center; box-sizing: border-box;}
+        .btn:hover { background-color: #4338ca; }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>DevVault</h2>
+        <div class="nav-item active" onclick="showSection('dashboard', this)">My Dashboard</div>
+        <div class="nav-item" onclick="showSection('recordings', this)">Recorded Sessions</div>
+        <div class="nav-item">Resources</div>
+        <div class="nav-item">Settings</div>
+    </div>
+
+    <div class="main">
+        <div class="header">
+            <h1 id="main-title" style="margin:0; font-size: 1.4rem;">Developer Training Portal</h1>
+            <div class="user-profile">
+                <span class="user-name">Student</span>
+                <img src="https://ui-avatars.com/api/?name=Student&background=4f46e5&color=fff" alt="Profile" class="profile-pic">
+            </div>
+        </div>
+
+        <div id="dashboard" class="content-section active">
+            <h2 style="margin-bottom: 25px;">My Tech Stack Courses</h2>
+            <div class="grid">
+                <div class="card">
+                    <span class="tag">Frontend</span>
+                    <h3>HTML Essentials</h3>
+                    <progress value="100" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/16rfnT51tiWYCUCqVXRjW-Kq8ytPaceOz?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+                
+                <div class="card">
+                    <span class="tag">Frontend</span>
+                    <h3>CSS Styling</h3>
+                    <progress value="66" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1_kyS6ouZpc5AcBo9awHdcrMIM_ulmm4U?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Language</span>
+                    <h3>JavaScript Mastery</h3>
+                    <progress value="75" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1929ZQGgUFYbPTicYw-OL-5z5nSOLFFdh?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Framework</span>
+                    <h3>React.js Library</h3>
+                    <progress value="13" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1H6rW2FPlX9OWhws8QB8j9vrFN7Q1Du_g?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Backend</span>
+                    <h3>Java Programming</h3>
+                    <progress value="100" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1_0odnRTP30e7WuZm-TKRbMhOcqnHfnX_?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Database</span>
+                    <h3>JDBC Connectivity</h3>
+                    <progress value="80" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1v3SHS_hcXfiHCiRuDaQNzeY2lPimwpCF?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card" style="border-top-color: #6db33f;">
+                    <span class="tag">Backend</span>
+                    <h3>Spring Framework</h3>
+                    <progress value="5" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1HhndMcWdjDUZAyjFE9UNWR58nkYYjNjr?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                 <div class="card" style="border-top-color: #f29111;">
+                    <span class="tag">Database</span>
+                    <h3>SQL Database</h3>
+                    <progress value="50" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1JfNKO4Fqdcenw_csS1pj3bAo9GdmXuPI?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Version Control</span>
+                    <h3>Git & Github</h3>
+                    <progress value="100" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1hJtqwYHs__TdcitDYJh-OjKrIZdD0Uqp?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                <div class="card">
+                    <span class="tag">Framework</span>
+                    <h3>Bootstrap</h3>
+                    <progress value="80" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1P5Tj7B1gW3hJIwBEgFgP2edZbUUufPsf?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+                   <div class="card">
+                    <span class="tag">cv</span>
+                    <h3>Resume</h3>
+                    <progress value="75" max="100"></progress>
+                    <a href="https://drive.google.com/drive/folders/1fB_lyo4ZHi-5wU1Wj1IzFYoutP5RbPca?usp=drive_link" target="_blank" class="btn">Access Materials</a>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="recordings" class="content-section">
+            <h2 style="margin-bottom: 25px;">Recorded Class Library</h2>
+            <div class="recording-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Module</th>
+                            <th>Description</th>
+                            <th>Access</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>HTML</td>
+                            <td>Structure & Semantics Folders</td>
+                            <td><a href="https://drive.google.com/drive/folders/16rfnT51tiWYCUCqVXRjW-Kq8ytPaceOz?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>CSS</td>
+                            <td>Styling & Responsive Design</td>
+                            <td><a href="https://drive.google.com/drive/folders/1_kyS6ouZpc5AcBo9awHdcrMIM_ulmm4U?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>JavaScript</td>
+                            <td>Logic & DOM Manipulation</td>
+                            <td><a href="https://drive.google.com/drive/folders/1929ZQGgUFYbPTicYw-OL-5z5nSOLFFdh?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>React.js</td>
+                            <td>Components & Hooks</td>
+                            <td><a href="https://drive.google.com/drive/folders/1H6rW2FPlX9OWhws8QB8j9vrFN7Q1Du_g?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>Java</td>
+                            <td>Core Java & OOPs</td>
+                            <td><a href="https://drive.google.com/drive/folders/1_0odnRTP30e7WuZm-TKRbMhOcqnHfnX_?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>JDBC</td>
+                            <td>Database Connectivity</td>
+                            <td><a href="https://drive.google.com/drive/folders/1v3SHS_hcXfiHCiRuDaQNzeY2lPimwpCF?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>SQL</td>
+                            <td>Queries & Management</td>
+                            <td><a href="https://drive.google.com/drive/folders/1JfNKO4Fqdcenw_csS1pj3bAo9GdmXuPI?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>Spring</td>
+                            <td>Framework & Boot</td>
+                            <td><a href="https://drive.google.com/drive/folders/1HhndMcWdjDUZAyjFE9UNWR58nkYYjNjr?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                                                <tr>
+                            <td>Bootstrap</td>
+                            <td>Framework</td>
+                            <td><a href="https://drive.google.com/drive/folders/1P5Tj7B1gW3hJIwBEgFgP2edZbUUufPsf?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>Git & Github</td>
+                            <td>Version Control</td>
+                            <td><a href="https://drive.google.com/drive/folders/1hJtqwYHs__TdcitDYJh-OjKrIZdD0Uqp?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                        <tr>
+                            <td>Resume</td>
+                            <td>CV</td>
+                            <td><a href="https://drive.google.com/drive/folders/1fB_lyo4ZHi-5wU1Wj1IzFYoutP5RbPca?usp=drive_link" target="_blank" class="play-btn">▶ Open Drive</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId, element) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(sec => sec.classList.remove('active'));
+
+            // Show target section
+            document.getElementById(sectionId).classList.add('active');
+
+            // Update active state in sidebar
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Add active class to clicked element
+            if (element) {
+                element.classList.add('active');
+            }
+
+            // Update header title based on section
+            const title = document.getElementById('main-title');
+            title.innerText = sectionId === 'dashboard' ? 'Developer Training Portal' : 'Class Archive';
+        }
+    </script>
+</body>
+</html>
